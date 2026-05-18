@@ -103,7 +103,7 @@ const Notes = () => {
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/notes', {
+      const res = await axios.get('https://moodmint-ozqw.onrender.com/api/notes', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setNotes(res.data);
@@ -149,11 +149,11 @@ const Notes = () => {
       const noteData = { title, content, category, color, pinned, favorite };
 
       if (editMode) {
-        const res = await axios.put(`http://localhost:5000/api/notes/${selectedNoteId}`, noteData, config);
+        const res = await axios.put(`https://moodmint-ozqw.onrender.com/api/notes/${selectedNoteId}`, noteData, config);
         setNotes(prev => prev.map(n => n._id === selectedNoteId ? res.data : n));
         addToast('Note updated! ✏️');
       } else {
-        const res = await axios.post('http://localhost:5000/api/notes', noteData, config);
+        const res = await axios.post('https://moodmint-ozqw.onrender.com/api/notes', noteData, config);
         setNotes(prev => [res.data, ...prev]);
         
         // Confetti!
@@ -179,7 +179,7 @@ const Notes = () => {
     e.stopPropagation();
     if (!window.confirm('Are you sure you want to delete this note? 🗑️')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+      await axios.delete(`https://moodmint-ozqw.onrender.com/api/notes/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setNotes(prev => prev.filter(n => n._id !== id));
@@ -193,7 +193,7 @@ const Notes = () => {
   const handleTogglePin = async (id, e) => {
     e.stopPropagation();
     try {
-      const res = await axios.patch(`http://localhost:5000/api/notes/${id}/pin`, {}, {
+      const res = await axios.patch(`https://moodmint-ozqw.onrender.com/api/notes/${id}/pin`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setNotes(prev => prev.map(n => n._id === id ? res.data : n));
@@ -207,7 +207,7 @@ const Notes = () => {
   const handleToggleFavorite = async (id, e) => {
     e.stopPropagation();
     try {
-      const res = await axios.patch(`http://localhost:5000/api/notes/${id}/favorite`, {}, {
+      const res = await axios.patch(`https://moodmint-ozqw.onrender.com/api/notes/${id}/favorite`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setNotes(prev => prev.map(n => n._id === id ? res.data : n));

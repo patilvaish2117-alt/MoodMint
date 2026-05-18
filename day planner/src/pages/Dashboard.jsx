@@ -15,7 +15,7 @@ const Dashboard = () => {
         const token = localStorage.getItem('token');
         const headers = { Authorization: `Bearer ${token}` };
         
-        const tasksRes = await axios.get('http://localhost:5000/api/tasks', { headers });
+        const tasksRes = await axios.get('https://moodmint-ozqw.onrender.com/api/tasks', { headers });
         setTasks(tasksRes.data.slice(0, 5)); // Get top 5 tasks
       } catch (error) {
         console.error('Error fetching dashboard data', error);

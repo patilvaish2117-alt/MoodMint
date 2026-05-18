@@ -132,7 +132,7 @@ const FocusTimer = () => {
   const fetchSessions = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/sessions', {
+      const res = await axios.get('https://moodmint-ozqw.onrender.com/api/sessions', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setSessions(res.data);
@@ -153,7 +153,7 @@ const FocusTimer = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await axios.get('https://moodmint-ozqw.onrender.com/api/tasks', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setTasks(res.data.filter(t => !t.completed));
@@ -360,7 +360,7 @@ const FocusTimer = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
       const durationVal = isFocus ? focusDur : mode === 'Short Break' ? shortBreakDur : longBreakDur;
-      await axios.post('http://localhost:5000/api/sessions', {
+      await axios.post('https://moodmint-ozqw.onrender.com/api/sessions', {
         sessionType: mode,
         duration: durationVal,
         completed: true
@@ -370,7 +370,7 @@ const FocusTimer = () => {
       
       // Auto complete selected task if checked
       if (isFocus && selectedTaskId) {
-        await axios.put(`http://localhost:5000/api/tasks/${selectedTaskId}`, 
+        await axios.put(`https://moodmint-ozqw.onrender.com/api/tasks/${selectedTaskId}`, 
           { completed: true },
           { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }}
         );
@@ -419,7 +419,7 @@ const FocusTimer = () => {
   const handleClearHistory = async () => {
     if (window.confirm('Clear focus session history? 🗑️')) {
       try {
-        await axios.delete('http://localhost:5000/api/sessions', {
+        await axios.delete('https://moodmint-ozqw.onrender.com/api/sessions', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setSessions([]);

@@ -99,7 +99,7 @@ if (process.env.NODE_ENV === 'production' && fs.existsSync(frontendDistPath)) {
 } else {
   // Simple welcome landing for standalone API mode
   app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the MoodMint API Server' });
+    res.send("Backend is running");
   });
 }
 

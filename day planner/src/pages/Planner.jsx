@@ -16,7 +16,7 @@ const Planner = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await axios.get('https://moodmint-ozqw.onrender.com/api/tasks', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setTasks(res.data);
@@ -29,7 +29,7 @@ const Planner = () => {
     e.preventDefault();
     if (!newTask.trim()) return;
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', 
+      const res = await axios.post('https://moodmint-ozqw.onrender.com/api/tasks', 
         { title: newTask, priority },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }}
       );
@@ -42,7 +42,7 @@ const Planner = () => {
 
   const toggleTask = async (id, currentStatus) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, 
+      const res = await axios.put(`https://moodmint-ozqw.onrender.com/api/tasks/${id}`, 
         { completed: !currentStatus },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }}
       );
@@ -54,7 +54,7 @@ const Planner = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await axios.delete(`https://moodmint-ozqw.onrender.com/api/tasks/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setTasks(tasks.filter(t => t._id !== id));

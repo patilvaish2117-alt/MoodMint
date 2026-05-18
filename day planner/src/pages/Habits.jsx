@@ -93,7 +93,7 @@ const Habits = () => {
   const fetchHabits = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/habits', {
+      const res = await axios.get('https://moodmint-ozqw.onrender.com/api/habits', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setHabits(res.data);
@@ -137,11 +137,11 @@ const Habits = () => {
       const habitData = { title, category, frequency, emoji };
 
       if (editMode) {
-        const res = await axios.put(`http://localhost:5000/api/habits/${selectedHabitId}`, habitData, config);
+        const res = await axios.put(`https://moodmint-ozqw.onrender.com/api/habits/${selectedHabitId}`, habitData, config);
         setHabits(prev => prev.map(h => h._id === selectedHabitId ? res.data : h));
         addToast('Habit updated successfully! ✨');
       } else {
-        const res = await axios.post('http://localhost:5000/api/habits', habitData, config);
+        const res = await axios.post('https://moodmint-ozqw.onrender.com/api/habits', habitData, config);
         setHabits(prev => [res.data, ...prev]);
         addToast('New habit created! 🌱');
       }
@@ -155,7 +155,7 @@ const Habits = () => {
   const handleDeleteHabit = async (id) => {
     if (!window.confirm('Are you sure you want to delete this habit? 🗑️')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/habits/${id}`, {
+      await axios.delete(`https://moodmint-ozqw.onrender.com/api/habits/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setHabits(prev => prev.filter(h => h._id !== id));
@@ -168,7 +168,7 @@ const Habits = () => {
 
   const handleToggleComplete = async (id, currentCompleted) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/api/habits/${id}/complete`, {}, {
+      const res = await axios.patch(`https://moodmint-ozqw.onrender.com/api/habits/${id}/complete`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
